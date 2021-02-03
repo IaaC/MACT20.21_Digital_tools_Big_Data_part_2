@@ -69,11 +69,15 @@ if len(deaths_country) > 0:
 covid_data = confirmed_data.append(deaths_data)
 covid_data['year_month'] = covid_data['date'].dt.to_period('M')
 
-ax = sns.barplot(x='year_month', y='cases', hue='kind', data=covid_data)
+ax = sns.barplot(x='year_month', y='cases', hue='kind', data=covid_data, ci=None)
 ax.set(xlabel='Year - Month', ylabel='Cases', title=title)
 plt.show()
 plt.close()
 
+
+
+
+# Not sure if this code below works properly
 
 data = deaths_data[deaths_data['deaths'] > 0]
 initial_day = data['date'].min()
