@@ -65,8 +65,7 @@ plt.close()
 
 # Second, we can group some values to make the plot easy to read
 data['year_month'] = data['date'].dt.to_period('M')
-data_month = data.groupby('year_month', as_index=False).sum()
-ax = sns.barplot(x='year_month', y='confirmed_cases', data=data_month)
+ax = sns.barplot(x='year_month', y='confirmed_cases', data=data, ci=False)
 ax.set(xlabel='Year / month', ylabel='Confirmed cases', title=title)
 plt.show()
 plt.close()
