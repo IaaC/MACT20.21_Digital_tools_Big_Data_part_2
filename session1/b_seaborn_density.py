@@ -31,10 +31,14 @@ countries = ('Spain', 'France', 'Colombia', 'United Kingdom')
 # First, we will create an histogram for the values in 2019
 
 # matplotlib histogram
-plt.hist(gdp_growth['2019'], color='blue', edgecolor='black', bins=20)
+plt.hist(gdp_growth['2009'], color='blue', edgecolor='black', bins=20)
+plt.show()
 
 # seaborn histogram
-sns.distplot(gdp_growth['2019'], hist=True, kde=False, bins=20, color='blue',
+penguins = sns.load_dataset("penguins")
+sns.displot(data=gdp_growth, x="2009")
+
+sns.displot(gdp_growth['2009'], hist=True, kde=False, bins=20, color='blue',
              hist_kws={'edgecolor':'black'})
 # Add labels
 plt.title('Histogram of GDP growth in 2019')
@@ -45,7 +49,7 @@ plt.ylabel('Frequency')
 
 # Second, we can create a histogram for a single country
 # To understand the logics, we will do the task with a single country
-name = [countries[0]]
+name = [countries[2]]
 country = pd.DataFrame(name, columns=['name'])
 country_values = gdp_growth[gdp_growth['Country Name'] == country['name'][0]]
 gdp_growth_values = country_values.iloc[0, 4:]
