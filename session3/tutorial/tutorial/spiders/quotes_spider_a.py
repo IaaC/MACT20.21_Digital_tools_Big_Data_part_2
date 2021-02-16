@@ -8,7 +8,6 @@ class QuotesSpider(scrapy.Spider):
         urls = [
             'http://quotes.toscrape.com/page/1/',
             'http://quotes.toscrape.com/page/2/',
-            'https://iaac.net/educational-programmes/masters-programmes/master-in-city-technology/#faculty'
         ]
         for url in urls:
             yield scrapy.Request(url=url, callback=self.parse)
