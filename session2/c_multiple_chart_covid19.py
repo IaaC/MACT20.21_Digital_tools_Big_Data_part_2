@@ -80,8 +80,8 @@ for country in countries:
 
 covid_data['year_month'] = covid_data['date'].dt.to_period('M')
 
-g = sns.FacetGrid(row='country', data=covid_data)
-g.map(sns.barplot, x='year_month', y='cases', hue='kind', ci=None, data=covid_data)
+g = sns.FacetGrid(covid_data, col='country', hue='kind')
+g.map(sns.barplot, 'year_month', 'cases', ci=None)
 
 plt.show()
 plt.close()
