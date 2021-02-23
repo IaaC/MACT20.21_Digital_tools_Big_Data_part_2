@@ -40,7 +40,7 @@ def init():
 # The second one returns a line (sin function) based on a parameter
 def animate(i):
     x = np.linspace(0, 4, 1000)
-    y = np.sin(2 * np.pi * (x - 0.01 * i))
+    y = x * x * 0.01 * i
     line.set_data(x, y)
     return line,
 
