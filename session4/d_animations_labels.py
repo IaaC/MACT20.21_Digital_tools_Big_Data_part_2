@@ -27,8 +27,8 @@ import seaborn as sns
 import matplotlib
 
 # Read files and prepare data
-data = pd.read_csv('../data/2021_seguiment-covid19-bcn.csv')
-#data = pd.read_csv('https://opendata-ajuntament.barcelona.cat/data/dataset/4f3ffbda-d5be-4f2a-a836-26a77be6df1a/resource/f627ac0a-d05f-416d-9773-eeb464a3fc44/download')
+# data = pd.read_csv('../data/2021_seguiment-covid19-bcn.csv')
+data = pd.read_csv('https://opendata-ajuntament.barcelona.cat/data/dataset/4f3ffbda-d5be-4f2a-a836-26a77be6df1a/resource/f627ac0a-d05f-416d-9773-eeb464a3fc44/download')
 data.columns = ['date_indicator', 'frequency_indicator', 'place', 'name_indicator',
                 'name_variable', 'value', 'unit', 'source']
 # We will use two datasets to generate plots
@@ -39,7 +39,7 @@ initial_day = data['date_indicator'].min()
 data['day_after_zero'] = data['date_indicator'] - initial_day
 data['day_after_zero'] = data['day_after_zero']/np.timedelta64(1, 'D')
 # we also extract some values to set the plot limits
-max_day = data['day_after_zero'].max().astype(int)
+max_day = int(data['day_after_zero'].max())
 max_cases = data['value'].max()
 title = 'Barcelona: '
 
@@ -62,10 +62,10 @@ plt.title(title, fontsize=20)
 # variable "i" is the frame id that can be used to handle queries or filters for your data
 def animate(i):
     frame_data = data[data['day_after_zero'] <= i]
-    p = sns.lineplot(x='day_after_zero', y='value'/1000, data=frame_data, color="r")
+    p = sns.lineplot(x='day_after_zero', y='value', data=frame_data, color="r")
     p.tick_params(labelsize=17)
     plt.setp(p.lines, linewidth=1)
-    plt.title(title + 'Day' + str(i))
+    plt.title(title + 'Day ' + str(i))
 
 
 ani = matplotlib.animation.FuncAnimation(fig, animate, frames=max_day, repeat=True)
