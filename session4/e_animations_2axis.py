@@ -27,8 +27,8 @@ import pandas as pd
 import seaborn as sns
 
 # Read files and prepare data
-data = pd.read_csv('../data/2021_seguiment-covid19-bcn.csv')
-#data = pd.read_csv('https://opendata-ajuntament.barcelona.cat/data/dataset/4f3ffbda-d5be-4f2a-a836-26a77be6df1a/resource/f627ac0a-d05f-416d-9773-eeb464a3fc44/download')
+#data = pd.read_csv('../data/2021_seguiment-covid19-bcn.csv')
+data = pd.read_csv('https://opendata-ajuntament.barcelona.cat/data/dataset/4f3ffbda-d5be-4f2a-a836-26a77be6df1a/resource/f627ac0a-d05f-416d-9773-eeb464a3fc44/download')
 data.columns = ['date_indicator', 'frequency_indicator', 'place', 'name_indicator',
                 'name_variable', 'value', 'unit', 'source']
 # We will use two datasets to generate plots
@@ -46,7 +46,7 @@ data_accumulated.loc[:, 'day_after_zero'] = data_accumulated['date_indicator'] -
 data_accumulated.loc[:, 'day_after_zero'] = data_accumulated['day_after_zero']/np.timedelta64(1, 'D')
 
 # we also extract some values to set the plot limits
-max_day = data_daily['day_after_zero'].max().astype(int)
+max_day = int(data_daily['day_after_zero'].max())
 max_cases_daily = data_daily['value'].max()
 max_cases_accumulated = data_accumulated['value'].max()
 title = 'Barcelona: '
