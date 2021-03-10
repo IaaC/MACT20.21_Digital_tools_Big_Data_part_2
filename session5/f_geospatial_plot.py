@@ -19,13 +19,10 @@
 ##################################################
 
 # We need to import pandas library as well as the plot libraries matplotlib and seaborn
-import pandas as pd
 import geopandas
 import matplotlib.pyplot as plt
 
-
 # We read the file from Open Data Barcelona
-# https://opendata-ajuntament.barcelona.cat/data/en/dataset/20170706-districtes-barris/resource/cd800462-f326-429f-a67a-c69b7fc4c50a
 bcn_admin_areas = geopandas.read_file('../data/0301100100_UNITATS_ADM_POLIGONS.json')
 
 # In order to get a projected view of our plots, we need to change the CRS first
