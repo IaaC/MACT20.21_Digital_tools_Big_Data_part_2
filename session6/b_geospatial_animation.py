@@ -53,7 +53,7 @@ def animate(i):
 
 
 # Lastly,the animation function uses the previous parameters to produce multiple plots
-danim = FuncAnimation(fig, animate, frames=frames)
+anim = FuncAnimation(fig, animate, frames=frames)
 anim.save('geospatial_animation.mp4', writer=writer)
 
 
