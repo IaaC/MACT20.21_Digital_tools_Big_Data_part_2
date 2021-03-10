@@ -25,33 +25,30 @@ import matplotlib.pyplot as plt
 #import mapclassify
 #import pyproj
 #from pyproj import Proj
+from shapely.geometry import Point, Polygon
+
+
 
 # We read the file from Open Data Barcelona
+# the columns of the DataFrame
 # https://opendata-ajuntament.barcelona.cat/data/en/dataset/20170706-districtes-barris/resource/cd800462-f326-429f-a67a-c69b7fc4c50a
 bcn_admin_areas = geopandas.read_file('../data/0301100100_UNITATS_ADM_POLIGONS.json')
+bcn_census_areas = bcn_admin_areas[bcn_admin_areas['TIPUS_UA'] == 'SEC_CENS']
 
+# We get a testing data set for drawing points
+foot_fall = pd.read_csv('../data/Footfall_data_python.csv')
+
+#foot_fall.columns
+#Index([u'ID', u'X', u'Y'], dtype='object')
+foot_fall['geometry'] = foot_fall.apply(lambda row: Point(row.LONGITUDE, row.LATITUDE), axis=1)
+foot_fall_gdf = geopandas.GeoDataFrame(foot_fall.loc[0:100])
 # In order to get a projected view of our plots, we need to change the CRS first
 # bcn_admin_areas = bcn_admin_areas.to_crs({'init': 'epsg:2169'})
 
 # PRINT OUT a basic plot with municipalities
-ax = bcn_admin_areas.boundary.plot()
+ax = bcn_census_areas.boundary.plot()
 ax.set_title("Barcelona Administrative Areas")
 plt.show()
-plt.close()
 
-ax = bcn_admin_areas[bcn_admin_areas['TIPUS_UA'] == 'DISTRICTE'].boundary.plot()
-ax.set_title("Barcelona Districts")
-plt.show()
-plt.close()
-
-ax = bcn_admin_areas[bcn_admin_areas['TIPUS_UA'] == 'BARRI'].boundary.plot()
-ax.set_title("Barcelona Neighbourhoods")
-plt.show()
-plt.close()
-
-ax = bcn_admin_areas[bcn_admin_areas['TIPUS_UA'] == 'AEB'].boundary.plot()
-ax.set_title("Barcelona Census area Boundary")
-plt.show()
-plt.close()
-
+ax1 = foot_fall_gdf.plot()
 print('End')
