@@ -38,28 +38,34 @@ cadastral_values = pd.read_csv(url)
 
 # Let's start with a simple histogram
 sns.histplot(data=cadastral_values, x="Valor_€")
+plt.show()
 plt.close()
 
 # We cal also see the different alternatives to visualise histograms and frequencies
 # A histogram with pre-defined bin-widths for 50k €
 sns.histplot(data=cadastral_values, x="Valor_€", binwidth=50000000)
+plt.show()
 plt.close()
 # Histograms per district
 sns.histplot(data=cadastral_values, x="Valor_€", hue='Nom_districte')
+plt.show()
 plt.close()
 # Different histograms per district and pre-defined bin-widths
 sns.histplot(data=cadastral_values, x="Valor_€", binwidth=100000000, hue='Nom_barri')
+plt.show()
 plt.close()
 # Histograms using lines/steps or polygons
 sns.histplot(data=cadastral_values, x="Valor_€", hue='Nom_districte', element="step")
+plt.show()
 plt.close()
 sns.histplot(data=cadastral_values, x="Valor_€", hue='Nom_districte', element="poly")
+plt.show()
 plt.close()
-
 
 
 # 2D histograms
 sns.histplot(data=cadastral_values, x="Valor_€", y='Nom_districte')
+plt.show()
 plt.close()
 
 print('End')

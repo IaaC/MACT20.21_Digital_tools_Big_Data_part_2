@@ -68,14 +68,12 @@ plt.ylabel('Average cadastral price')
 
 # The second one returns a line (sin function) based on a parameter
 def animate(i):
-    frame_data = data[data['Codi_districte'] <= i]
+    frame_data = data[(data['Codi_districte'] <= i) & (data['Desc_valors'] == 'Valor_cadastral')]
     plt.clf()
     fig.set_size_inches(10, 6)
     plt.xlim(0, max_value_area)
     plt.ylim(0, max_value_value)
-    sns.scatterplot(data=frame_data, x='Sup_mitjana_m2', y='Valor_€', alpha=0.5, hue='Nom_districte')
-
-
+    sns.scatterplot(data=frame_data, x='Sup_mitjana_m2', y='Valor_€', alpha=0.8, hue='Nom_districte')
 
 
 # Lastly,the animation function uses the previous parameters to produce multiple plots
