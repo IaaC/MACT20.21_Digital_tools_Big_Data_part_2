@@ -41,14 +41,25 @@ foot_fall = pd.read_csv('../data/Footfall_data_python.csv')
 #foot_fall.columns
 #Index([u'ID', u'X', u'Y'], dtype='object')
 foot_fall['geometry'] = foot_fall.apply(lambda row: Point(row.LONGITUDE, row.LATITUDE), axis=1)
-foot_fall_gdf = geopandas.GeoDataFrame(foot_fall.loc[0:100])
-# In order to get a projected view of our plots, we need to change the CRS first
-# bcn_admin_areas = bcn_admin_areas.to_crs({'init': 'epsg:2169'})
+foot_fall_gdf = geopandas.GeoDataFrame(foot_fall)
 
-# PRINT OUT a basic plot with municipalities
+# We can plot individual layers
 ax = bcn_census_areas.boundary.plot()
 ax.set_title("Barcelona Administrative Areas")
 plt.show()
 
+# Second plot
 ax1 = foot_fall_gdf.plot()
+print('End')
+
+
+# to overlay the two layers we need to be sure they share the common CRS
+# In order to get a projected view of our plots, we need to change the CRS first
+bcn_census_areas = bcn_census_areas.to_crs({'init': 'epsg:4326'})
+
+# Later, we need to define the base layers and the overlay
+base = bcn_census_areas.plot(color='white', edgecolor='black')
+
+foot_fall_gdf.plot(ax=base, marker='o', color='red', markersize=5)
+
 print('End')
